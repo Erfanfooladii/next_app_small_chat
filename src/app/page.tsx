@@ -14,7 +14,7 @@ export default function Home() {
 
   const handleSendMessage = (message: string) => {
     const data = { room, sender: userName, message };
-    socket.emit("message", data); // ارسال پیام به سرور
+    socket.emit("message", data); 
     setMessages([...messages, data]);
   };
 
