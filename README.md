@@ -11,7 +11,6 @@ A real-time chat application built with:
 
 - 📨 Real-time messaging
 - 🚪 Room-based chat system
-- 👥 Dynamic user join/leave notifications
 - 💬 Responsive UI with Tailwind
 
 ## 🚀 Getting Started
