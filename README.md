@@ -27,3 +27,16 @@ A real-time chat application built with:
    ```bash
    git clone https://github.com/your-username/your-repo.git
    ```
+2. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Start the dev server
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open http://localhost:3000 in your browser
