@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:socket": "node --import \"data:text/javascript,import { register } from 'node:module'; import { pathToFileURL } from 'node:url'; register(`${pathToFileURL('./node_modules/ts-node/esm.mjs')}`, `${pathToFileURL('./')}`);\" server.mts",
+    "dev:socket": "NODE_ENV=development ts-node server.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -27,6 +27,8 @@
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4.1.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "packageManager": "pnpm@10.3.0+sha512.ee592eda8815a8a293c206bb0917c4bb0ff274c50def7cbc17be05ec641fc2d1b02490ce660061356bd0d126a4d7eb2ec8830e6959fb8a447571c631d5a2442d"
 }
