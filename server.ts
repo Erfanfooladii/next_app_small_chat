@@ -26,7 +26,7 @@ app
         socket.join(room);
         console.log(`User ${username} joined room ${room}`);
 
-        socket.emit("join-rxoom", `You joined room ${room}`);
+        socket.emit("join-room", `You joined room ${room}`);
         socket.to(room).emit("user-joined", `${username} joined the room`);
       });
 
