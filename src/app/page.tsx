@@ -8,13 +8,13 @@ export default function Home() {
   const [messages, setMessages] = useState<
     { sender: string; message: string }[]
   >([]);
-  const [room, setRoom] = useState("");
-  const [joined, setJoined] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [room, setRoom] = useState<string>("");
+  const [joined, setJoined] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
 
   const handleSendMessage = (message: string) => {
     const data = { room, sender: userName, message };
-    socket.emit("message", data); 
+    socket.emit("message", data);
     setMessages([...messages, data]);
   };
 
@@ -38,6 +38,8 @@ export default function Home() {
     });
 
     socket.on("user-joined", (msg) => {
+      console.log(msg);
+
       setMessages((prevData) => [
         ...prevData,
         { sender: "System", message: msg },
@@ -52,13 +54,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-[500px] min-w-[500px] flex justify-center m-auto">
+    <div className="w-[500px] h-screen items-center flex justify-center m-auto">
       {joined ? (
         <div className="flex w-full gap-2 flex-col">
-          <div className="bg-gray-400 w-full p-2 shadow rounded-md">
-            <h2 className="text-2xl font-bold">Room: {room}</h2>
+          <div className="bg-sky-500 w-full p-2 shadow rounded-md">
+            <h2 className="text-2xl text-white font-bold">Room: {room}</h2>
           </div>
-          <div className="flex flex-col overflow-y-auto items-start gap-2 w-full bg-sky-300 p-2 rounded-md h-[832px] max-h-[830px]">
+          <div className="flex flex-col overflow-y-auto items-start gap-2 w-full bg-sky-100 p-2 rounded-md h-[832px] max-h-[830px]">
             {messages.map((item, index) => (
               <ChatMessage
                 key={index}
@@ -75,14 +77,14 @@ export default function Home() {
           <h2 className="text-2xl font-bold">Join a room</h2>
           <input
             type="text"
-            className="bg-blue-300 p-2 rounded-md"
+            className="bg-blue-300 focus:outline-none border-b-2 border-orange-400 focus:border-b-2 focus:border-sky-100 p-2 rounded-md"
             placeholder="UserName"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
           <input
             type="text"
-            className="bg-blue-300 p-2 rounded-md"
+            className="bg-blue-300 focus:outline-none border-b-2 border-orange-400 focus:border-b-2 focus:border-sky-100 p-2 rounded-md"
             placeholder="Room name"
             value={room}
             onChange={(e) => setRoom(e.target.value)}
