@@ -35,7 +35,7 @@ A real-time chat application built with:
 3. Start the dev server
 
    ```bash
-   npm run dev
+   npm run dev:socket
    ```
 
 4. Open http://localhost:3000 in your browser
