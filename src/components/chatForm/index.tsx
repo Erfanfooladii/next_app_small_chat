@@ -16,7 +16,7 @@ const ChatForm = ({
   return (
     <form
       onSubmit={handeleSumite}
-      className="w-full bg-white p-1 flex justify-center items-center gap-2"
+      className="w-full rounded-xl shadow bg-gray-200 p-1 flex justify-center items-center gap-2"
     >
       <input
         onChange={(e) => {
@@ -24,10 +24,12 @@ const ChatForm = ({
         }}
         placeholder="Enter yout message"
         value={message}
-        className="p-2 rounded-b-md w-full shadow bg-gray-200"
+        className="p-2  w-full bg-gray-200"
         type="text"
       />
-      <button className="bg-blue-500 text-white rounded-md p-2">send</button>
+      <button className="bg-blue-500 cursor-pointer hover:bg-sky-400 focus:outline-none text-white rounded-md p-2">
+        send
+      </button>
     </form>
   );
 };
