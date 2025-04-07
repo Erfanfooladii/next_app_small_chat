@@ -1,12 +1,23 @@
+import logoImg from "../../../public/logo.png";
+type LoginProps = {
+  userName: string;
+  setUserName: (value: string) => void;
+  room: string;
+  handleJoinRoom: () => void;
+  setRoom: (value: string) => void;
+};
 const LoginRoom = ({
   userName,
   setUserName,
   room,
   handleJoinRoom,
   setRoom,
-}) => {
+}: LoginProps) => {
   return (
     <div className="p-2 flex flex-col gap-4 items-center">
+      <div className="w-10 h-10">
+        <img src={logoImg} className="w-full h-full" alt="logo image" />
+      </div>
       <h2 className="text-2xl font-bold">Join a room</h2>
       <input
         type="text"
@@ -31,3 +42,4 @@ const LoginRoom = ({
     </div>
   );
 };
+export default LoginRoom;

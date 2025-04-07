@@ -1,57 +1,19 @@
 "use client";
 import ChatMessage from "@/components/chatMessage";
-import { useEffect, useState } from "react";
 import ChatForm from "@/components/chatForm";
-import { socket } from "@/lib/socketClient";
-
-export default function Home() {
-  const [messages, setMessages] = useState<
-    { sender: string; message: string }[]
-  >([]);
-  const [room, setRoom] = useState<string>("");
-  const [joined, setJoined] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
-
-  const handleSendMessage = (message: string) => {
-    const data = { room, sender: userName, message };
-    socket.emit("message", data);
-    setMessages([...messages, data]);
-  };
-
-  const handleJoinRoom = () => {
-    if (userName && room) {
-      socket.emit("join-room", { username: userName, room });
-      setJoined(true);
-    }
-  };
-
-  useEffect(() => {
-    socket.on("message", (data) => {
-      setMessages((prevData) => [...prevData, data]);
-    });
-
-    socket.on("join-room", (msg) => {
-      setMessages((prevData) => [
-        ...prevData,
-        { sender: "System", message: msg },
-      ]);
-    });
-
-    socket.on("user-joined", (msg) => {
-      console.log(msg);
-
-      setMessages((prevData) => [
-        ...prevData,
-        { sender: "System", message: msg },
-      ]);
-    });
-
-    return () => {
-      socket.off("message");
-      socket.off("join-room");
-      socket.off("user-joined");
-    };
-  }, []);
+import { useChatRoom } from "@/utils/useChatRoom";
+import LoginRoom from "@/components/loginRoom";
+const ChatRoom = () => {
+  const {
+    messages,
+    room,
+    joined,
+    userName,
+    setRoom,
+    setUserName,
+    handleJoinRoom,
+    handleSendMessage,
+  } = useChatRoom();
 
   return (
     <div className="w-[500px] h-screen items-center flex justify-center m-auto">
@@ -73,30 +35,15 @@ export default function Home() {
           <ChatForm onSendMessage={handleSendMessage} />
         </div>
       ) : (
-        <div className="p-2 flex flex-col gap-4 items-center">
-          <h2 className="text-2xl font-bold">Join a room</h2>
-          <input
-            type="text"
-            className="bg-blue-300 focus:outline-none border-b-2 border-orange-400 focus:border-b-2 focus:border-sky-100 p-2 rounded-md"
-            placeholder="UserName"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <input
-            type="text"
-            className="bg-blue-300 focus:outline-none border-b-2 border-orange-400 focus:border-b-2 focus:border-sky-100 p-2 rounded-md"
-            placeholder="Room name"
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-          />
-          <button
-            onClick={handleJoinRoom}
-            className="p-3 bg-blue-500 text-white rounded-md"
-          >
-            Join
-          </button>
-        </div>
+        <LoginRoom
+          setRoom={setRoom}
+          setUserName={setUserName}
+          handleJoinRoom={handleJoinRoom}
+          room={room}
+          userName={userName}
+        />
       )}
     </div>
   );
-}
+};
+export default ChatRoom;
