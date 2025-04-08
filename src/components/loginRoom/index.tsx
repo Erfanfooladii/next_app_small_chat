@@ -1,3 +1,4 @@
+import Image from "next/image";
 import logoImg from "../../../public/logo.png";
 type LoginProps = {
   userName: string;
@@ -14,9 +15,12 @@ const LoginRoom = ({
   setRoom,
 }: LoginProps) => {
   return (
-    <div className="p-2 flex flex-col gap-4 items-center">
-      <div className="w-10 h-10">
-        <img src={logoImg} className="w-full h-full" alt="logo image" />
+    <form
+      onSubmit={handleJoinRoom}
+      className="p-2 flex flex-col gap-4 items-center"
+    >
+      <div className="w-24 h-24">
+        <Image src={logoImg} className="w-full h-full" alt="logo image" />
       </div>
       <h2 className="text-2xl font-bold">Join a room</h2>
       <input
@@ -33,13 +37,10 @@ const LoginRoom = ({
         value={room}
         onChange={(e) => setRoom(e.target.value)}
       />
-      <button
-        onClick={handleJoinRoom}
-        className="p-3 bg-blue-500 text-white rounded-md"
-      >
+      <button type="submit" className="p-3 bg-blue-500 text-white rounded-md">
         Join
       </button>
-    </div>
+    </form>
   );
 };
 export default LoginRoom;
