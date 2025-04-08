@@ -16,7 +16,7 @@ const ChatRoom = () => {
   } = useChatRoom();
 
   return (
-    <div className="w-[500px] h-screen items-center flex justify-center m-auto">
+    <div className="w-full px-2 md:w-[500px] h-screen items-center flex justify-center m-auto">
       {joined ? (
         <div className="flex w-full gap-2 flex-col">
           <div className="bg-sky-500 w-full p-2 shadow rounded-md">
