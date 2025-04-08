@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useChatForm } from "@/utils/useChatForm";
 
 const ChatForm = ({
   onSendMessage,
 }: {
   onSendMessage: (message: string) => void;
 }) => {
-  const [message, setMessage] = useState<string>("");
-  const handeleSumite = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (message.trim() !== "") {
-      onSendMessage(message);
-      setMessage("");
-    }
-  };
+  const { handeleSumite, setMessage, message } = useChatForm({ onSendMessage });
   return (
     <form
       onSubmit={handeleSumite}
