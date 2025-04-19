@@ -37,7 +37,10 @@ const LoginRoom = ({
         value={room}
         onChange={(e) => setRoom(e.target.value)}
       />
-      <button type="submit" className="p-3 bg-blue-500 text-white rounded-md">
+      <button
+        type="submit"
+        className="p-3 shadow hover:bg-blue-700 cursor-pointer bg-blue-500 text-white rounded-md"
+      >
         Join
       </button>
     </form>
